@@ -5,7 +5,9 @@
 Setup the CMSSW release. The code `nanoFakes.C` fails with (at least) `10_2_0` and `10_6_4`.
 
     cd work
-    mkdir fakes
+    mkdir -p fake_rate
+    
+    cd fake_rate
 
     export SCRAM_ARCH=slc7_amd64_gcc630
     cmsrel CMSSW_10_1_0
@@ -22,7 +24,7 @@ Updated code.
 
 ## Get ready
 
-    cd work/fakes/CMSSW_10_1_0/src
+    cd work/fake_rate/CMSSW_10_1_0/src
     cmsenv
     cd FakeRateMeasurement
 
