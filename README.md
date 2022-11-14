@@ -22,7 +22,7 @@ This code:
 
     git clone https://github.com/NTrevisani/FakeRateMeasurement
 
-## Get ready
+## Source the code
 
     cd work/fake_rate/CMSSW_10_1_0/src
     cmsenv
