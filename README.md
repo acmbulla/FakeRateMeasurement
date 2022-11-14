@@ -1,11 +1,6 @@
 # Everything begins here
 
-Log in to lxplus.
-
-    ssh -Y piedra@lxplus.cern.ch -o ServerAliveInterval=240
-    bash -l
-
-# First time
+## Install 
 
 Setup the CMSSW release. The code `nanoFakes.C` fails with (at least) `10_2_0` and `10_6_4`.
 
@@ -25,13 +20,13 @@ Updated code.
 
     git clone https://github.com/NTrevisani/FakeRateMeasurement
 
-# Get ready
+## Get ready
 
     cd work/fakes/CMSSW_10_1_0/src
     cmsenv
     cd FakeRateMeasurement
 
-# Check before job submission
+## Check before job submission
 
 Check (and edit if needed) the following files.
 
@@ -39,7 +34,7 @@ Check (and edit if needed) the following files.
    * `nanoFakes.C` contains the triggers and the corresponding prescales. Edit this file if, for example, you need to move from Ele12 to Ele8.
    * `submitJobs.py` contains the data and MC samples names. Verify that they match the current production.
 
-# Submit jobs
+## Submit jobs
 
 **2022/07/13, open issue.** The option `-d` below does not seem to fully work. It helps (at least for 2017 and 2018) choosing between data and MC, but the full path is read from `runNanoFakes.C`.
 
@@ -63,12 +58,12 @@ Check (and edit if needed) the following files.
     python submitJobs.py -d /eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer20UL18_106x_nAODv9_Full2018v9/MCl1loose2018v9__fakeSelKinMC/ -y 2018
     python submitJobs.py -d /eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_UL2018_nAODv9_Full2018v9/DATAl1loose2018v9__fakeSel -y 2018
 
-# Babysit jobs
+## Babysit jobs
 
     condor_q
     condor_q -hold -af HoldReason
 
-# Wrap it up
+## Wrap it up
 
     cd results
 
@@ -92,11 +87,11 @@ Move the merged files to their corresponding year directory.
     mkdir <year>
     mv hadd* <year>/.
 
-# Extract the fake and prompt rates
+## Extract the fake and prompt rates
 
     root -l -b -q getFakeRate.C
 
-# Share on the web
+## Share on the web
 
     cp -r png /afs/cern.ch/user/p/piedra/www/fakerate
 
@@ -109,7 +104,7 @@ And the results should appear [here](https://piedra.web.cern.ch/piedra/fakerate)
 
     https://piedra.web.cern.ch/piedra/fakerate
 
-# Some relevant physics
+## Some relevant physics
 
    * The jet pt thresholds for electrons are 35 GeV for 0-jet, 1-jet and 2-jets.
    * The jet pt thresholds for muons are 20 GeV for 0-jet, 25 GeV for 1-jet, and 35 GeV for 2-jets.
