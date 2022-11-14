@@ -14,11 +14,11 @@ Setup the CMSSW release. The code `nanoFakes.C` fails with (at least) `10_2_0` a
     cd CMSSW_10_1_0/src
     cmsenv
 
-Original code.
+Original code:
 
     git clone https://github.com/latinos/FakeRateMeasurement
 
-Updated code.
+This code:
 
     git clone https://github.com/NTrevisani/FakeRateMeasurement
 
