@@ -23,7 +23,7 @@ Original code.
 
 Updated code.
 
-    git clone https://github.com/piedraj/FakeRateMeasurement
+    git clone https://github.com/NTrevisani/FakeRateMeasurement
 
 # Get ready
 
