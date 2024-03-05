@@ -21,23 +21,29 @@ void runNanoFakes(TString year = "2017", TString filename = "NONE")
 {
   if (year == "2016_HIPM")
     {
-      path_mc   = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer20UL16_106x_nAODv9_HIPM_Full2016v9/MCl1loose2016v9__fakeSelKinMC/";
-      path_data = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_UL2016_nAODv9_HIPM_Full2016v9/DATAl1loose2016v9__fakeSel/";
+      path_mc   = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Summer20UL16_106x_nAODv9_HIPM_Full2016v9/MCl1loose2016v9__MCCorr2016v9NoJERInHorn__fakeSelKinMCVBFW/";
+      path_data = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Run2016_UL2016_nAODv9_HIPM_Full2016v9/DATAl1loose2016v9__fakeSelVBFW/";
     }
   else if (year == "2016_noHIPM")
     {
-      path_mc   = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer20UL16_106x_nAODv9_noHIPM_Full2016v9/MCl1loose2016v9__fakeSelKinMC/";
-      path_data = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2016_UL2016_nAODv9_noHIPM_Full2016v9/DATAl1loose2016v9__fakeSel/";
+      path_mc   = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Summer20UL16_106x_nAODv9_noHIPM_Full2016v9/MCl1loose2016v9__MCCorr2016v9NoJERInHorn__fakeSelKinMCVBFW/";
+      path_data = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Run2016_UL2016_nAODv9_noHIPM_Full2016v9/DATAl1loose2016v9__fakeSelVBFW/";
     }
   else if (year == "2017")
     {
-      path_mc   = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer20UL17_106x_nAODv9_Full2017v9/MCl1loose2017v9__fakeSelKinMC/";
-      path_data = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2017_UL2017_nAODv9_Full2017v9/DATAl1loose2017v9__fakeSel/";
+      path_mc   = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Summer20UL17_106x_nAODv9_Full2017v9/MCl1loose2017v9__MCCorr2017v9NoJERInHorn__fakeSelKinMCVBFW/";
+      path_data = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Run2017_UL2017_nAODv9_Full2017v9/DATAl1loose2017v9__fakeSelVBFW/";
     }
   else if (year == "2018")
     {
-      path_mc   = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer20UL18_106x_nAODv9_Full2018v9/MCl1loose2018v9__fakeSelKinMC/";
-      path_data = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_UL2018_nAODv9_Full2018v9/DATAl1loose2018v9__fakeSel/";
+      // path_mc   = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Summer20UL18_106x_nAODv9_Full2018v9/MCl1loose2018v9__fakeSelKinMC/";
+      // path_mc   = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Summer20UL18_106x_nAODv9_Full2018v9/MCl1loose2018v9__MCCorr2018v9NoJERInHorn__fakeSelKinMCVBFW_inclusive/";
+      path_mc   = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Summer20UL18_106x_nAODv9_Full2018v9/MCl1loose2018v9__MCCorr2018v9NoJERInHorn__fakeSelKinMCVBFW/";
+      // path_mc   = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Summer20UL18_106x_nAODv9_Full2018v9/MCl1loose2018v9__MCCorr2018v9NoJERInHorn__fakeSelKinMCVBFW__MCmjjgr400/";
+      // path_data = "/eos/cms/store/group/phys_higgs/cmshww/amassiro/HWWNano/Run2018_UL2018_nAODv9_Full2018v9/DATAl1loose2018v9__fakeSel/";
+      // path_data = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Run2018_UL2018_nAODv9_Full2018v9/DATAl1loose2018v9__fakeSelVBFW_inclusive/";
+      path_data = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Run2018_UL2018_nAODv9_Full2018v9/DATAl1loose2018v9__fakeSelVBFW/";
+      // path_data = "/eos/cms/store/group/phys_smp/Latinos/vbfw/Run2018_UL2018_nAODv9_Full2018v9/DATAl1loose2018v9__fakeSelVBFW__DATAmjjgr400/";
     }
   else
     {

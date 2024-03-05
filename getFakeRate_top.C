@@ -30,6 +30,7 @@ Bool_t  debugWeights = false;
 Bool_t  setgrid      = true;
 Bool_t  Wsubtraction = true;
 Bool_t  Zsubtraction = true;
+Bool_t  topsubtraction = true;
 
 Bool_t  performPromptRate       = true;
 Bool_t  performElectronFakeRate = true;
@@ -40,6 +41,7 @@ Bool_t  performDataMC           = true; //this
 TFile*  dataFR;
 TFile*  wjetsFR;
 TFile*  zjetsFR;
+TFile*  topFR;
 TFile*  zjetsPR;
 
 Int_t   year_index;
@@ -121,7 +123,7 @@ TLegend* DrawLegend  (Float_t     x1,
 //    Float_t the_muojetet = 25
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void getFakeRate(TString the_year      = "2018",
+void getFakeRate_top(TString the_year      = "2018",
 		 TString the_leptondir = "cut_Tight_HWWW__mvaFall17V2Iso_WP90",
 		//  TString the_leptondir = "cut_Tight80x__mvaFall17V2Iso_WP90",
 		 Float_t the_elejetet  = 30,
@@ -176,6 +178,7 @@ void getFakeRate(TString the_year      = "2018",
   dataFR  = new TFile (inputdir + "/hadd_data.root",  "read");
   wjetsFR = new TFile (inputdir + "/hadd_wjets.root", "read");
   zjetsFR = new TFile (inputdir + "/hadd_zjets.root", "read");
+  topFR = new TFile (inputdir + "/hadd_top.root", "read");
   zjetsPR = new TFile (inputdir + "/hadd_zjets.root", "read");
 
 
@@ -339,6 +342,8 @@ void DrawAllJetEt(TString flavour,
     TH1D* h_tight_wjets = (TH1D*)wjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
     TH1D* h_loose_zjets = (TH1D*)zjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_loose_" + suffix);
     TH1D* h_tight_zjets = (TH1D*)zjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
+    TH1D* h_loose_top =   (TH1D*)topFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_loose_" + suffix);
+    TH1D* h_tight_top =   (TH1D*)topFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
 
 
     // Prepare fake rate histograms
@@ -351,9 +356,11 @@ void DrawAllJetEt(TString flavour,
     //--------------------------------------------------------------------------
     if (Zsubtraction) h_FR_EWK->Add(h_tight_zjets, -lepscale);
     if (Wsubtraction) h_FR_EWK->Add(h_tight_wjets, -1.4*lepscale);
+    if (topsubtraction) h_FR_EWK->Add(h_tight_top, -lepscale);
     
     if (Zsubtraction) h_FR_EWK_denominator->Add(h_loose_zjets, -lepscale);
     if (Wsubtraction) h_FR_EWK_denominator->Add(h_loose_wjets, -1.4*lepscale);
+    if (topsubtraction) h_FR_EWK_denominator->Add(h_loose_top, -lepscale);
     
     h_FR_EWK->Divide(h_FR_EWK_denominator);
 
@@ -391,6 +398,8 @@ void DrawFR(TString flavour,
   TH1D* h_tight_wjets = (TH1D*)wjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
   TH1D* h_loose_zjets = (TH1D*)zjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_loose_" + suffix);
   TH1D* h_tight_zjets = (TH1D*)zjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
+  TH1D* h_loose_top = (TH1D*)topFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_loose_" + suffix);
+  TH1D* h_tight_top = (TH1D*)topFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
 
 
   // Debug weights
@@ -405,6 +414,8 @@ void DrawFR(TString flavour,
       TH1D* h_tight_wjets_raw = (TH1D*)wjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix_raw);
       TH1D* h_loose_zjets_raw = (TH1D*)zjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_loose_" + suffix_raw);
       TH1D* h_tight_zjets_raw = (TH1D*)zjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix_raw);
+      TH1D* h_loose_top_raw = (TH1D*)topFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_loose_" + suffix_raw);
+      TH1D* h_tight_top_raw = (TH1D*)topFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix_raw);
 
       printf("\n  %s Z+jets %s %s when jet pt > %.0f GeV\n\n",
 	     year.Data(), flavour.Data(), variable.Data(), jetet);
@@ -455,9 +466,11 @@ void DrawFR(TString flavour,
 
   if (Zsubtraction) h_FR_EWK->Add(h_tight_zjets, -lepscale);
   if (Wsubtraction) h_FR_EWK->Add(h_tight_wjets, -1.4*lepscale);
+  if (topsubtraction) h_FR_EWK->Add(h_tight_top, -lepscale);
 
   if (Zsubtraction) h_FR_EWK_denominator->Add(h_loose_zjets, -lepscale);
   if (Wsubtraction) h_FR_EWK_denominator->Add(h_loose_wjets, -1.4*lepscale);
+  if (topsubtraction) h_FR_EWK_denominator->Add(h_loose_top, -lepscale);
 
   h_FR_EWK->Divide(h_FR_EWK_denominator);
 
@@ -517,12 +530,14 @@ void DrawFR(TString flavour,
   Cosmetics(h_tight_data,  "ep",      xtitle, title3, kBlack, 0, -999);
   Cosmetics(h_tight_zjets, "ep,same", xtitle, title3, kRed+1, 0, -999);
   Cosmetics(h_tight_wjets, "ep,same", xtitle, title3, kBlue,  0, -999);
+  Cosmetics(h_tight_top, "ep,same", xtitle, title3, kBlue,  0, -999);
   
   if (variable.Contains("pt"))
     {
       DrawLegend(0.67, 0.845, h_tight_data,  "tight data");
       DrawLegend(0.67, 0.800, h_tight_zjets, "tight Z+jets");
       DrawLegend(0.67, 0.755, h_tight_wjets, "tight W+jets");
+      DrawLegend(0.67, 0.755, h_tight_top, "tight top");
     }
 
   DrawLatex(42, 0.940, 0.945, 0.045, 31, Form("%.1f fb^{-1} (13 TeV)", year_lumi[year_index]));
@@ -542,12 +557,14 @@ void DrawFR(TString flavour,
   Cosmetics(h_loose_data,  "ep",      xtitle, title4, kBlack, 0, -999);
   Cosmetics(h_loose_zjets, "ep,same", xtitle, title4, kRed+1, 0, -999);
   Cosmetics(h_loose_wjets, "ep,same", xtitle, title4, kBlue,  0, -999);
+  Cosmetics(h_loose_top, "ep,same", xtitle, title4, kBlue,  0, -999);
 
   if (variable.Contains("pt"))
     {
       DrawLegend(0.67, 0.845, h_loose_data,  "loose data");
       DrawLegend(0.67, 0.800, h_loose_zjets, "loose Z+jets");
       DrawLegend(0.67, 0.755, h_loose_wjets, "loose W+jets");
+      DrawLegend(0.67, 0.755, h_loose_top, "loose top");
     }
 
   DrawLatex(42, 0.940, 0.945, 0.045, 31, Form("%.1f fb^{-1} (13 TeV)", year_lumi[year_index]));
@@ -606,6 +623,7 @@ Float_t GetLepScale(TString flavour,
   printf("\n %s \n", variable.Data());
   TH1D* h_zjets = (TH1D*)zjetsFR->Get(btagdir + "FR/"+FRdir+"/h_" + flavour + "_" + loose_tight + "_" + suffix);
   TH1D* h_wjets = (TH1D*)wjetsFR->Get(btagdir + "FR/"+FRdir+"/h_" + flavour + "_" + loose_tight + "_" + suffix);
+  TH1D* h_top = (TH1D*)topFR->Get(btagdir + "FR/"+FRdir+"/h_" + flavour + "_" + loose_tight + "_" + suffix);
 
   // h_data ->Rebin(2);
   // h_zjets->Rebin(2);
@@ -651,6 +669,10 @@ Float_t GetLepScale(TString flavour,
   h_wjets->SetFillColor(kGray+1);
   h_wjets->SetFillStyle(1001);
 
+  h_top->SetLineColor(kYellow+1);
+  h_top->SetFillColor(kYellow+1);
+  h_top->SetFillStyle(1001);
+
   h_zjets->SetTitle("");
   h_zjets->SetXTitle(xtitle);
   h_zjets->SetYTitle(ytitle);
@@ -658,6 +680,7 @@ Float_t GetLepScale(TString flavour,
   // clone the z and add w to it
   TH1D* h_zjets_clone = (TH1D*)h_zjets->Clone("h_zjets_clone");
   h_zjets->Add(h_wjets);
+  h_zjets->Add(h_top);
   h_zjets->SetLineColor(kAzure+2);
   h_zjets->SetFillColor(kAzure+2);
   h_zjets->SetFillStyle(1001);
@@ -676,6 +699,7 @@ Float_t GetLepScale(TString flavour,
   h_zjets_clone->Draw("ep,same");
   h_data ->Draw("ep,same");
   h_wjets->Draw("ep,same");
+  h_top->Draw("ep,same");
 
   Float_t ratio = 1.;
 
@@ -720,6 +744,8 @@ void WriteFR(TString flavour,
   TH2D* h_tight_wjets = (TH2D*)wjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
   TH2D* h_loose_zjets = (TH2D*)zjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_loose_" + suffix);
   TH2D* h_tight_zjets = (TH2D*)zjetsFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
+  TH2D* h_loose_top = (TH2D*)topFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_loose_" + suffix);
+  TH2D* h_tight_top = (TH2D*)topFR->Get(btagdir + "FR/00_QCD/h_" + flavour + "_tight_" + suffix);
 
 
   // Prepare fake rate histograms
@@ -738,9 +764,11 @@ void WriteFR(TString flavour,
 
   if (Zsubtraction) h_FR_EWK_numerator->Add(h_tight_zjets, -lepscale);
   if (Wsubtraction) h_FR_EWK_numerator->Add(h_tight_wjets, -1.4*lepscale);
+  if (topsubtraction) h_FR_EWK_numerator->Add(h_tight_top, -lepscale);
 
   if (Zsubtraction) h_FR_EWK_denominator->Add(h_loose_zjets, -lepscale);
   if (Wsubtraction) h_FR_EWK_denominator->Add(h_loose_wjets, -1.4*lepscale);
+  if (topsubtraction) h_FR_EWK_denominator->Add(h_loose_top, -lepscale);
 
   h_FR_EWK->Divide(h_FR_EWK_numerator, h_FR_EWK_denominator);
 

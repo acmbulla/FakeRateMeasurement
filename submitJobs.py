@@ -78,11 +78,11 @@ def submit():
     for sample in samples:
 
         if year == "2016_HIPM":
-            if ("DYJetsToLL_M-10to50__" in sample) or ("DYJetsToLL_M-50-LO__" in sample) or ("WJetsToLNu-LO__" in sample) or ("DoubleMuon" in sample) or ("DoubleEG" in sample): 
+            if ("DYJetsToLL_M-10to50__" in sample) or ("DYJetsToLL_M-50" in sample) or ("WJetsToLNu-LO__" in sample) or ("DoubleMuon" in sample) or ("DoubleEG" in sample): 
                 if resubmit is False or not os.path.exists('results/'+sample):
                     jobs.append(sample)
         elif year == "2016_noHIPM":
-            if ("DYJetsToLL_M-10to50__" in sample) or ("DYJetsToLL_M-50-LO__" in sample) or ("WJetsToLNu-LO__" in sample) or ("DoubleMuon" in sample) or ("DoubleEG" in sample): 
+            if ("DYJetsToLL_M-10to50__" in sample) or ("DYJetsToLL_M-50" in sample) or ("WJetsToLNu-LO__" in sample) or ("DoubleMuon" in sample) or ("DoubleEG" in sample): 
                 if resubmit is False or not os.path.exists('results/'+sample):
                     jobs.append(sample)
         elif year == "2017":
@@ -90,7 +90,12 @@ def submit():
                 if resubmit is False or not os.path.exists('results/'+sample):
                     jobs.append(sample)
         elif year == "2018":
-            if ("DYJetsToLL_M-10to50-LO__" in sample) or ("DYJetsToLL_M-50-LO__" in sample) or ("WJetsToLNu-LO__" in sample) or ("DoubleMuon" in sample) or ("EGamma" in sample):
+            # if ("DYJetsToLL_M-10to50-LO__" in sample) or ("DYJetsToLL_M-50-LO__" in sample) or ("WJetsToLNu-LO__" in sample) or ("SingleMuon" in sample) or ("EGamma" in sample):
+            # # if ("DoubleMuon" in sample):
+            #     if resubmit is False or not os.path.exists('results/'+sample):
+            #         jobs.append(sample)
+            if ("TTTo" in sample) or ("ST_" in sample):
+            # if ("DoubleMuon" in sample):
                 if resubmit is False or not os.path.exists('results/'+sample):
                     jobs.append(sample)
 

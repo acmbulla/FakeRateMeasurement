@@ -38,15 +38,17 @@ const TString lchannel[nchannel] = {
   "l",
 };
 
-const int      njetet = 7; 
-const Double_t muonjetet[njetet] = {10, 15, 20, 25, 30, 35, 45}; 
-const Double_t elejetet [njetet] = {10, 15, 20, 25, 30, 35, 45}; 
+const int      njetet = 1; 
+const Double_t muonjetet[njetet] = {30}; 
+const Double_t elejetet [njetet] = {30}; 
 
-const int      nptbin = 8;
-const Double_t ptbins[nptbin+1] = {10, 15, 20, 25, 30, 35, 40, 45, 50};
+const int      nptbin = 6;
+const Double_t ptbins[nptbin+1] = {25, 28, 31, 35, 40, 55, 75};
 
-const int      netabin = 5;
-const Double_t etabins[netabin+1] = {0, 0.5, 1.0, 1.5, 2.0, 2.5};
+const int      netabin = 8;
+const Double_t etabins[netabin+1] = {-2.0, -1.5, -1.0, -0.5, 0., 0.5, 1.0, 1.5, 2.0};
+// const int      netabin = 4;
+// const Double_t etabins[netabin+1] = {-2.0, -1.0, 0., 1.0, 2.0};
 
 const int      nbtag = 4;
 const TString  btags[nbtag] = {"", "bveto", "loose", "mediumtight"};
@@ -128,6 +130,26 @@ class nanoFakes : public TSelector
   TH1D* h_Muon_tight_m2l[ncutFR][njetet][nbtag];
   TH1D* h_Ele_loose_m2l [ncutFR][njetet][nbtag];
   TH1D* h_Ele_tight_m2l [ncutFR][njetet][nbtag];
+
+  TH1D* h_Muon_loose_lept1[ncutFR][njetet][nbtag];
+  TH1D* h_Muon_tight_lept1[ncutFR][njetet][nbtag];
+  TH1D* h_Ele_loose_lept1[ncutFR][njetet][nbtag];
+  TH1D* h_Ele_tight_lept1[ncutFR][njetet][nbtag];
+
+  TH1D* h_Muon_loose_lepeta1[ncutFR][njetet][nbtag];
+  TH1D* h_Muon_tight_lepeta1[ncutFR][njetet][nbtag];
+  TH1D* h_Ele_loose_lepeta1[ncutFR][njetet][nbtag];
+  TH1D* h_Ele_tight_lepeta1[ncutFR][njetet][nbtag];
+
+  TH1D* h_Muon_loose_lept2[ncutFR][njetet][nbtag];
+  TH1D* h_Muon_tight_lept2[ncutFR][njetet][nbtag];
+  TH1D* h_Ele_loose_lept2[ncutFR][njetet][nbtag];
+  TH1D* h_Ele_tight_lept2[ncutFR][njetet][nbtag];
+
+  TH1D* h_Muon_loose_lepeta2[ncutFR][njetet][nbtag];
+  TH1D* h_Muon_tight_lepeta2[ncutFR][njetet][nbtag];
+  TH1D* h_Ele_loose_lepeta2[ncutFR][njetet][nbtag];
+  TH1D* h_Ele_tight_lepeta2[ncutFR][njetet][nbtag];
    
   TH2D* h_Muon_loose_pt_m2l[ncutFR][njetet][nbtag];
   TH2D* h_Muon_tight_pt_m2l[ncutFR][njetet][nbtag];
@@ -184,12 +206,16 @@ class nanoFakes : public TSelector
   TTreeReaderValue<Float_t> PuppiMET_pt = {fReader, "PuppiMET_pt"};
   TTreeReaderValue<Float_t> dphilep1jet1 = {fReader, "dphilep1jet1"};
   TTreeReaderValue<Float_t> Electron_pfRelIso03_all = {fReader, "Electron_pfRelIso03_all"};
+  TTreeReaderValue<Float_t> dphilmet1 = {fReader, "dphilmet1"};
   
   TTreeReaderValue<Bool_t> HLT_Mu8_TrkIsoVVL = {fReader, "HLT_Mu8_TrkIsoVVL"};
   TTreeReaderValue<Bool_t> HLT_Mu17_TrkIsoVVL = {fReader, "HLT_Mu17_TrkIsoVVL"};
   TTreeReaderValue<Bool_t> HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 = {fReader, "HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30"};
   TTreeReaderValue<Bool_t> HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30 = {fReader, "HLT_Ele12_CaloIdL_TrackIdL_IsoVL_PFJet30"};
   TTreeReaderValue<Bool_t> HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 = {fReader, "HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30"};
+
+  TTreeReaderValue<Bool_t> HLT_IsoMu24 = {fReader, "HLT_IsoMu24"};
+  TTreeReaderValue<Bool_t> HLT_Ele32_WPTight_Gsf = {fReader, "HLT_Ele32_WPTight_Gsf"};
 
 
   //Different electron and muon working points
@@ -198,17 +224,17 @@ class nanoFakes : public TSelector
   //  TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight80x_tthmva_80"};
   //  TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90"};
 
-  // 2016 (pair 2)
+  // 2016 (my)
   //  TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight80x"};
-  //  TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90_tthmva_70"};
+  //  TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90"};
 
   // 2016 (pair 3)
   //  TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight80x_tthmva_80"};
   //  TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90_SS_tthmva_70"};
 
   // 2016 (pair 4)
-  TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight80x"};
-  TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90_SS"};
+  // TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight80x"};
+  // TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90_SS"};
 
   // 2017 and 2018 (pair 1)
   //  TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight_HWWW_tthmva_80"};
@@ -222,9 +248,9 @@ class nanoFakes : public TSelector
   //  TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight_HWWW_tthmva_80"};
   //  TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90_SS_tthmva_70"};
 
-  // 2017 and 2018 (pair 4)
-  //  TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight_HWWW"};
-  //  TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90_SS"};
+  // 2017 and 2018 (my)
+   TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight_HWWW"};
+   TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90"};
 
 
   nanoFakes(TTree * /*tree*/ =0) { }

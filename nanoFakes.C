@@ -82,38 +82,39 @@ void nanoFakes::Begin(TTree*)
       printf(" Reading %s prescales\n\n", year.Data());
 
       eleLowPtPrescale   =  11.028;  //  14.851;
-      eleHighPtPrescale  =  52.768;  //  62.808;
+      eleHighPtPrescale  =  52.768313258;  //  62.808;
       muonLowPtPrescale  =   6.584;  //   7.801;
-      muonHighPtPrescale = 192.064;  // 216.748;
+      muonHighPtPrescale =  192.063722844;  // 216.748;
     }
   else if (year == "2016_noHIPM")
     {
       printf(" Reading %s prescales\n\n", year.Data());
 
       eleLowPtPrescale   =  3.980;  //  14.851;
-      eleHighPtPrescale  = 10.699;  //  62.808;
+      eleHighPtPrescale  = 10.699483420;  //  62.808;
       muonLowPtPrescale  =  1.297;  //   7.801;
-      muonHighPtPrescale = 26.873;  // 216.748;
+      muonHighPtPrescale = 26.872793405;  // 216.748;
     }
   else if(year == "2017")
     {
       printf(" Reading %s prescales\n\n", year.Data());
 
-      eleLowPtPrescale   =  3.973;  // Ele8
+      eleLowPtPrescale   =  3.970041451; //3.973;  // Ele8
     //eleLowPtPrescale   = 27.699;  // Ele12
-      eleHighPtPrescale  = 43.469;
-      muonLowPtPrescale  =  2.903;
-      muonHighPtPrescale = 65.944;
+      eleHighPtPrescale  = 43.453223348; //43.469;
+      muonLowPtPrescale  = 2.899706509; //2.903;
+      muonHighPtPrescale = 65.898920913; //65.944;
     }
   else if(year == "2018")
     {
       printf(" Reading %s prescales\n\n", year.Data());
 
-      eleLowPtPrescale   =  6.412;  // Ele8
+      eleLowPtPrescale   =  6.425;  // 6.412;  // Ele8
     //eleLowPtPrescale   = 38.849;  // Ele12
-      eleHighPtPrescale  = 38.906;
-      muonLowPtPrescale  =  8.561;
-      muonHighPtPrescale = 45.781;
+      eleHighPtPrescale  = 59827.879505586;  // 38.906;
+      muonLowPtPrescale  =  8.582;  // 8.561;
+      // muonHighPtPrescale = 45.852;   // 45.781;
+      muonHighPtPrescale = 59819.714473512;   // 45.781;
     }
 
 
@@ -148,36 +149,56 @@ void nanoFakes::Begin(TTree*)
 	//----------------------------------------------------------------------
 	h_Muon_loose_pt_eta_bin[i][j][btag] = new TH2D("h_Muon_loose_pt_eta_bin" + muonsuffix, "", nptbin, ptbins, netabin, etabins);
 	h_Muon_tight_pt_eta_bin[i][j][btag] = new TH2D("h_Muon_tight_pt_eta_bin" + muonsuffix, "", nptbin, ptbins, netabin, etabins);
-	h_Ele_loose_pt_eta_bin [i][j][btag] = new TH2D("h_Ele_loose_pt_eta_bin"  + elesuffix,  "", nptbin, ptbins, netabin, etabins);
-	h_Ele_tight_pt_eta_bin [i][j][btag] = new TH2D("h_Ele_tight_pt_eta_bin"  + elesuffix,  "", nptbin, ptbins, netabin, etabins);
+	h_Ele_loose_pt_eta_bin[i][j][btag] = new TH2D("h_Ele_loose_pt_eta_bin"  + elesuffix,  "", nptbin, ptbins, netabin, etabins);
+	h_Ele_tight_pt_eta_bin[i][j][btag] = new TH2D("h_Ele_tight_pt_eta_bin"  + elesuffix,  "", nptbin, ptbins, netabin, etabins);
 	
 	h_Muon_loose_pt_bin[i][j][btag] = new TH1D("h_Muon_loose_pt_bin" + muonsuffix, "", nptbin, ptbins);
 	h_Muon_tight_pt_bin[i][j][btag] = new TH1D("h_Muon_tight_pt_bin" + muonsuffix, "", nptbin, ptbins);
-	h_Ele_loose_pt_bin [i][j][btag] = new TH1D("h_Ele_loose_pt_bin"  + elesuffix,  "", nptbin, ptbins);
-	h_Ele_tight_pt_bin [i][j][btag] = new TH1D("h_Ele_tight_pt_bin"  + elesuffix,  "", nptbin, ptbins);
+	h_Ele_loose_pt_bin[i][j][btag] = new TH1D("h_Ele_loose_pt_bin"  + elesuffix,  "", nptbin, ptbins);
+	h_Ele_tight_pt_bin[i][j][btag] = new TH1D("h_Ele_tight_pt_bin"  + elesuffix,  "", nptbin, ptbins);
 
 	h_Muon_loose_pt_bin_raw[i][j][btag] = new TH1D("h_Muon_loose_pt_bin_raw" + muonsuffix, "", nptbin, ptbins);
 	h_Muon_tight_pt_bin_raw[i][j][btag] = new TH1D("h_Muon_tight_pt_bin_raw" + muonsuffix, "", nptbin, ptbins);
-	h_Ele_loose_pt_bin_raw [i][j][btag] = new TH1D("h_Ele_loose_pt_bin_raw"  + elesuffix,  "", nptbin, ptbins);
-	h_Ele_tight_pt_bin_raw [i][j][btag] = new TH1D("h_Ele_tight_pt_bin_raw"  + elesuffix,  "", nptbin, ptbins);
+	h_Ele_loose_pt_bin_raw[i][j][btag] = new TH1D("h_Ele_loose_pt_bin_raw"  + elesuffix,  "", nptbin, ptbins);
+	h_Ele_tight_pt_bin_raw[i][j][btag] = new TH1D("h_Ele_tight_pt_bin_raw"  + elesuffix,  "", nptbin, ptbins);
 	
 	h_Muon_loose_eta_bin[i][j][btag] = new TH1D("h_Muon_loose_eta_bin" + muonsuffix, "", netabin, etabins);
 	h_Muon_tight_eta_bin[i][j][btag] = new TH1D("h_Muon_tight_eta_bin" + muonsuffix, "", netabin, etabins);
-	h_Ele_loose_eta_bin [i][j][btag] = new TH1D("h_Ele_loose_eta_bin"  + elesuffix,  "", netabin, etabins);
-	h_Ele_tight_eta_bin [i][j][btag] = new TH1D("h_Ele_tight_eta_bin"  + elesuffix,  "", netabin, etabins);
+	h_Ele_loose_eta_bin[i][j][btag] = new TH1D("h_Ele_loose_eta_bin"  + elesuffix,  "", netabin, etabins);
+	h_Ele_tight_eta_bin[i][j][btag] = new TH1D("h_Ele_tight_eta_bin"  + elesuffix,  "", netabin, etabins);
 
 
 	// Effective luminosity estimation histograms
 	//----------------------------------------------------------------------
-	h_Muon_loose_m2l[i][j][btag] = new TH1D("h_Muon_loose_m2l" + muonsuffix, "", 1000, 0, 200);
-	h_Muon_tight_m2l[i][j][btag] = new TH1D("h_Muon_tight_m2l" + muonsuffix, "", 1000, 0, 200);
-	h_Ele_loose_m2l [i][j][btag] = new TH1D("h_Ele_loose_m2l"  + elesuffix,  "", 1000, 0, 200);
-	h_Ele_tight_m2l [i][j][btag] = new TH1D("h_Ele_tight_m2l"  + elesuffix,  "", 1000, 0, 200);
+	h_Muon_loose_m2l[i][j][btag] = new TH1D("h_Muon_loose_m2l" + muonsuffix, "", 20, 80, 100);
+	h_Muon_tight_m2l[i][j][btag] = new TH1D("h_Muon_tight_m2l" + muonsuffix, "", 20, 80, 100);
+	h_Ele_loose_m2l[i][j][btag] = new TH1D("h_Ele_loose_m2l"  + elesuffix,  "", 20, 80, 100);
+	h_Ele_tight_m2l[i][j][btag] = new TH1D("h_Ele_tight_m2l"  + elesuffix,  "", 20, 80, 100);
+
+	h_Muon_loose_lept1[i][j][btag] = new TH1D("h_Muon_loose_lept1" + muonsuffix, "", 1000, 0, 200);
+	h_Muon_tight_lept1[i][j][btag] = new TH1D("h_Muon_tight_lept1" + muonsuffix, "", 1000, 0, 200);
+	h_Ele_loose_lept1[i][j][btag] = new TH1D("h_Ele_loose_lept1"  + elesuffix,  "", 1000, 0, 200);
+	h_Ele_tight_lept1[i][j][btag] = new TH1D("h_Ele_tight_lept1"  + elesuffix,  "", 1000, 0, 200);
+
+	h_Muon_loose_lept2[i][j][btag] = new TH1D("h_Muon_loose_lept2" + muonsuffix, "", 1000, 0, 200);
+	h_Muon_tight_lept2[i][j][btag] = new TH1D("h_Muon_tight_lept2" + muonsuffix, "", 1000, 0, 200);
+	h_Ele_loose_lept2[i][j][btag] = new TH1D("h_Ele_loose_lept2"  + elesuffix,  "", 1000, 0, 200);
+	h_Ele_tight_lept2[i][j][btag] = new TH1D("h_Ele_tight_lept2"  + elesuffix,  "", 1000, 0, 200);
+
+	h_Muon_loose_lepeta1[i][j][btag] = new TH1D("h_Muon_loose_lepeta1" + muonsuffix, "", 20, -2, 2);
+	h_Muon_tight_lepeta1[i][j][btag] = new TH1D("h_Muon_tight_lepeta1" + muonsuffix, "", 20, -2, 2);
+	h_Ele_loose_lepeta1[i][j][btag] = new TH1D("h_Ele_loose_lepeta1"  + elesuffix,  "",  20, -2, 2);
+	h_Ele_tight_lepeta1[i][j][btag] = new TH1D("h_Ele_tight_lepeta1"  + elesuffix,  "",  20, -2, 2); 
+
+	h_Muon_loose_lepeta2[i][j][btag] = new TH1D("h_Muon_loose_lepeta2" + muonsuffix, "", 20, -2, 2);
+	h_Muon_tight_lepeta2[i][j][btag] = new TH1D("h_Muon_tight_lepeta2" + muonsuffix, "", 20, -2, 2);
+	h_Ele_loose_lepeta2[i][j][btag] = new TH1D("h_Ele_loose_lepeta2"  + elesuffix,  "",  20, -2, 2);
+	h_Ele_tight_lepeta2[i][j][btag] = new TH1D("h_Ele_tight_lepeta2"  + elesuffix,  "",  20, -2, 2);
       
 	h_Muon_loose_pt_m2l[i][j][btag] = new TH2D("h_Muon_loose_pt_m2l" + muonsuffix, "", 200, 0, 200, nptbin, ptbins);
 	h_Muon_tight_pt_m2l[i][j][btag] = new TH2D("h_Muon_tight_pt_m2l" + muonsuffix, "", 200, 0, 200, nptbin, ptbins);
-	h_Ele_loose_pt_m2l [i][j][btag] = new TH2D("h_Ele_loose_pt_m2l"  + elesuffix,  "", 200, 0, 200, nptbin, ptbins);
-	h_Ele_tight_pt_m2l [i][j][btag] = new TH2D("h_Ele_tight_pt_m2l"  + elesuffix,  "", 200, 0, 200, nptbin, ptbins);
+	h_Ele_loose_pt_m2l[i][j][btag] = new TH2D("h_Ele_loose_pt_m2l"  + elesuffix,  "", 200, 0, 200, nptbin, ptbins);
+	h_Ele_tight_pt_m2l[i][j][btag] = new TH2D("h_Ele_tight_pt_m2l"  + elesuffix,  "", 200, 0, 200, nptbin, ptbins);
       }	
     }
   }
@@ -250,13 +271,23 @@ Bool_t nanoFakes::Process(Long64_t entry)
 
   nentries++;
  
-  channel = (abs(Lepton_pdgId[0]) == 11) ? e : m;
+  if (abs(Lepton_pdgId[0]) == 11) {
+    channel = e;
+  } else if (abs(Lepton_pdgId[0]) == 13) {
+    channel = m;
+  }
+  // channel = (abs(Lepton_pdgId[0]) == 11) ? e : m;
 
   leptonPtMin  = (channel == e) ?  13 :  10;  // [GeV]
   leptonEtaMax = (channel == e) ? 2.5 : 2.4;  // [GeV]
 
   if (Lepton_pt[0]        < leptonPtMin)  return 0;
   if (fabs(Lepton_eta[0]) > leptonEtaMax) return 0;
+  // if (*dphilmet1         > 1.5)  return 0;  
+  int nLepton15 = 0;
+  for (unsigned int iLep=0; iLep<*nLepton; iLep++) {
+    if (Lepton_pt[iLep] > 15.) nLepton15++;
+  }
 
   event_weight = 1.0;
 
@@ -270,48 +301,40 @@ Bool_t nanoFakes::Process(Long64_t entry)
 
   m2l = -999.0;
 
-  if (*nLepton >= 2) {
-
-    for (unsigned int iLep1=0; iLep1<*nLepton; iLep1++) {
-      
+  if (nLepton15 >= 2) {
+    for (unsigned int iLep1=0; iLep1<nLepton15; iLep1++) {
       if (Lepton_pt[iLep1] < 25.) continue;
+      if ((abs(Lepton_pdgId[iLep1]) == 11 && eleTightWP[iLep1] > 0.5) || (abs(Lepton_pdgId[iLep1]) == 13 && muonTightWP[iLep1] > 0.5)) {
 
-      if ((abs(Lepton_pdgId[iLep1]) == 11 && eleTightWP[iLep1] > 0.5) ||
-	  (abs(Lepton_pdgId[iLep1]) == 13 && muonTightWP[iLep1] > 0.5)) {
-
-	Zlepton1type   = Tight;
-	Zdecayflavour  = Lepton_pdgId[iLep1];
-	Zlepton1idisoW = 1.0;  // Temporary value until put in the trees
+        Zlepton1type   = Tight;
+        Zdecayflavour  = Lepton_pdgId[iLep1];
+        Zlepton1idisoW = 1.0;  // Temporary value until put in the trees
       }
 
-      for (unsigned int iLep2=iLep1+1; iLep2<*nLepton; iLep2++) {
-	
-	if (Lepton_pt[iLep2] < 10.) continue;
+      for (unsigned int iLep2=iLep1+1; iLep2<nLepton15; iLep2++) {
+	      if (Lepton_pt[iLep2] < 10.) continue;
+	      if (Lepton_pdgId[iLep1] + Lepton_pdgId[iLep2] != 0) continue;
 
-	if (Lepton_pdgId[iLep1] + Lepton_pdgId[iLep2] != 0) continue;
+        float mass1 = (abs(Lepton_pdgId[iLep1]) == 11) ? 0.000511 : 0.106;
+        float mass2 = (abs(Lepton_pdgId[iLep2]) == 11) ? 0.000511 : 0.106;
 
-	float mass1 = (abs(Lepton_pdgId[iLep1]) == 11) ? 0.000511 : 0.106;
-	float mass2 = (abs(Lepton_pdgId[iLep2]) == 11) ? 0.000511 : 0.106;
+        tlv1.SetPtEtaPhiM(Lepton_pt[iLep1], Lepton_eta[iLep1], Lepton_phi[iLep1], mass1);
+        tlv2.SetPtEtaPhiM(Lepton_pt[iLep2], Lepton_eta[iLep2], Lepton_phi[iLep2], mass2);
 
-	tlv1.SetPtEtaPhiM(Lepton_pt[iLep1], Lepton_eta[iLep1], Lepton_phi[iLep1], mass1);
-	tlv2.SetPtEtaPhiM(Lepton_pt[iLep2], Lepton_eta[iLep2], Lepton_phi[iLep2], mass2);
+	      float inv_mass = (tlv1 + tlv2).M();
 
-	float inv_mass = (tlv1 + tlv2).M();
-
-	if (m2l < 0 || fabs(inv_mass - 91.188) < fabs(m2l - 91.188)) {
+	      if (m2l < 0 || fabs(inv_mass - 91.188) < fabs(m2l - 91.188)) {
 	  
-	  m2l = inv_mass;
+          m2l = inv_mass;
 
-	  leptonIndex = iLep2;
+          leptonIndex = iLep2;
 	  
-	  // Is the second lepton tight?
-	  if ((abs(Lepton_pdgId[iLep2]) == 11 && eleTightWP[iLep2] > 0.5) ||
-	      (abs(Lepton_pdgId[iLep2]) == 13 && muonTightWP[iLep2] > 0.5)) {
-	    
-	    Zlepton2type   = Tight;
-	    Zlepton2idisoW = 1.0;  // Temporary value until put in the trees
-	  }
-	}
+          // Is the second lepton tight?
+          if ((abs(Lepton_pdgId[iLep2]) == 11 && eleTightWP[iLep2] > 0.5) || (abs(Lepton_pdgId[iLep2]) == 13 && muonTightWP[iLep2] > 0.5)) {
+            Zlepton2type   = Tight;
+            Zlepton2idisoW = 1.0;  // Temporary value until put in the trees
+          }
+	      }
       }
     }
   }
@@ -325,64 +348,59 @@ Bool_t nanoFakes::Process(Long64_t entry)
 
   if (ismc) event_weight = (*baseW/1e3) * (*puWeight) * (*Generator_weight);
 
-  if (event_weight > 2.) return kTRUE;  // Debug
+  if (event_weight > 2.){
+    std::cout << "Event weight is " << event_weight << std::endl;
+    return kTRUE; // skip event
+  } 
 
   if (ismc) {
 
     if (channel == m) {
-      
-      (Lepton_pt[0] <= 20.) ? event_weight *= muonLowPtPrescale : event_weight *= muonHighPtPrescale;  // Luminosity in fb-1 from brilcalc
-      
-      if (Lepton_pt[0] <= 20. && *HLT_Mu8_TrkIsoVVL > 0.5) {
-	
-	passTrigger = true;
-	
-      } else if (Lepton_pt[0] > 20. && *HLT_Mu17_TrkIsoVVL > 0.5) {
-	
-	passTrigger = true;
+      // (Lepton_pt[0] <= 20.) ? event_weight *= muonLowPtPrescale : event_weight *= muonHighPtPrescale;  // Luminosity in pb-1 from brilcalc
+      (Lepton_pt[0] <= 25.) ? event_weight *= muonLowPtPrescale : event_weight *= muonHighPtPrescale;  // Luminosity in pb-1 from brilcalc
+      // if (Lepton_pt[0] <= 20. && *HLT_Mu8_TrkIsoVVL > 0.5) {
+      // } else if (Lepton_pt[0] > 20. && *HLT_Mu17_TrkIsoVVL > 0.5) {
+      if (Lepton_pt[0] > 25. && *HLT_IsoMu24 > 0.5) {
+	      passTrigger = true;
+      } else {
+        passTrigger = false;
       }
     }
 
     if (channel == e) {
-      
-      (Lepton_pt[0] <= 25.) ? event_weight *= eleLowPtPrescale : event_weight *= eleHighPtPrescale;  // Luminosity in fb-1 from brilcalc
-      
-      if (Lepton_pt[0] <= 25. && *HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5) {
-	
-	passTrigger = true;
-	
-      } else if (Lepton_pt[0] > 25. && *HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5) {
-	
-	passTrigger = true;
+      // (Lepton_pt[0] <= 25.) ? event_weight *= eleLowPtPrescale : event_weight *= eleHighPtPrescale;  // Luminosity in pb-1 from brilcalc
+      (Lepton_pt[0] <= 35.) ? event_weight *= eleLowPtPrescale : event_weight *= eleHighPtPrescale;  // Luminosity in pb-1 from brilcalc
+      // if (Lepton_pt[0] <= 25. && *HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5) {
+      // } else if (Lepton_pt[0] > 25. && *HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5) {
+      if (Lepton_pt[0] > 35. && *HLT_Ele32_WPTight_Gsf > 0.5) {
+	      passTrigger = true;
+      } else {
+        passTrigger = false;
       }
     }
 
   } else {
-
-    if ((filename.Contains("DoubleMuon") or filename.Contains("SingleMuon")) && channel == m) {
-      
-      if (Lepton_pt[0] <= 20. && *HLT_Mu8_TrkIsoVVL > 0.5) {
-      
-	passTrigger = true;
-	
-      } else if (Lepton_pt[0] > 20. && *HLT_Mu17_TrkIsoVVL > 0.5) {
-
-	passTrigger = true;
+    // if ((filename.Contains("DoubleMuon") or filename.Contains("SingleMuon")) && channel == m) {
+    if ((filename.Contains("SingleMuon")) && channel == m) {
+      // if (Lepton_pt[0] <= 20. && *HLT_Mu8_TrkIsoVVL > 0.5) {
+	      // } else if (Lepton_pt[0] > 20. && *HLT_Mu17_TrkIsoVVL > 0.5) {
+      if ((Lepton_pt[0] > 25.) && (*HLT_IsoMu24 > 0.5)) {
+        passTrigger = true;
+      } else {
+        passTrigger = false;
       }
     }
 
     if ((filename.Contains("SingleEle") or filename.Contains("DoubleEG") or filename.Contains("EGamma")) && channel == e) {
-      
-      if (Lepton_pt[0] <= 25. && *HLT_Ele8_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5) {
-	
-	passTrigger = true;
-	
-      } else if (Lepton_pt[0] > 25. && *HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5) {
-	
-	passTrigger = true;
+      // } else if (Lepton_pt[0] > 25. && *HLT_Ele23_CaloIdL_TrackIdL_IsoVL_PFJet30 > 0.5) {
+      if ((Lepton_pt[0] > 35.) && (*HLT_Ele32_WPTight_Gsf > 0.5)) {
+	      passTrigger = true;
+      } else {
+        passTrigger = false;
       }
     }
   }
+
 
 
   // Away jet determination
@@ -419,17 +437,18 @@ Bool_t nanoFakes::Process(Long64_t entry)
 	}	
       }
 
-      bool passJets = (jetIndex != -1);
+      // bool passJets = (jetIndex != -1);
+      bool passJets = kTRUE;
 
 
       // QCD region
       //------------------------------------------------------------------------
       bool passCuts = passTrigger;
 
-      passCuts &= (*nLepton == 1);
+      passCuts &= (nLepton15 == 1);
       passCuts &= (*mtw1 < 20.);
-      passCuts &= (*PuppiMET_pt < 20.);
-
+      passCuts &= (*PuppiMET_pt < 60.);
+  
       FillLevelHistograms(FR_00_QCD, i, passJets && passCuts);
 
 
@@ -437,31 +456,47 @@ Bool_t nanoFakes::Process(Long64_t entry)
       //------------------------------------------------------------------------
       passCuts = passTrigger;
 
-      passCuts &= (*nLepton > 1);
-      passCuts &= (*PuppiMET_pt < 20.);
+      passCuts &= (nLepton15 > 1);
+      passCuts &= (*PuppiMET_pt < 60.);
       passCuts &= (m2l > 20.);
 
       if (passJets && passCuts) {
 	
 	if (fabs(Zdecayflavour) == 11) {
 	  
-	  h_Ele_loose_m2l   [FR_01_Zpeak][i][0]->Fill(m2l, event_weight);
+	  h_Ele_loose_m2l[FR_01_Zpeak][i][0]->Fill(m2l, event_weight);
+	  h_Ele_loose_lept1[FR_01_Zpeak][i][0]->Fill(tlv1.Pt(), event_weight);
+	  h_Ele_loose_lepeta1[FR_01_Zpeak][i][0]->Fill(tlv1.Eta(), event_weight);
+	  h_Ele_loose_lept2[FR_01_Zpeak][i][0]->Fill(tlv2.Pt(), event_weight);
+	  h_Ele_loose_lepeta2[FR_01_Zpeak][i][0]->Fill(tlv2.Eta(), event_weight);
 	  h_Ele_loose_pt_m2l[FR_01_Zpeak][i][0]->Fill(m2l, tlv1.Pt(), event_weight);
 	  
 	  if (Zlepton1type == Tight && Zlepton2type == Tight) {
 	    
-	    h_Ele_tight_m2l   [FR_01_Zpeak][i][0]->Fill(m2l, event_weight * l2tight_weight);
+	    h_Ele_tight_m2l[FR_01_Zpeak][i][0]->Fill(m2l, event_weight * l2tight_weight);
+      h_Ele_tight_lept1[FR_01_Zpeak][i][0]->Fill(tlv1.Pt(), event_weight * l2tight_weight);
+	    h_Ele_tight_lepeta1[FR_01_Zpeak][i][0]->Fill(tlv1.Eta(), event_weight * l2tight_weight);
+	    h_Ele_tight_lept2[FR_01_Zpeak][i][0]->Fill(tlv2.Pt(), event_weight * l2tight_weight);
+	    h_Ele_tight_lepeta2[FR_01_Zpeak][i][0]->Fill(tlv2.Eta(), event_weight * l2tight_weight);
 	    h_Ele_tight_pt_m2l[FR_01_Zpeak][i][0]->Fill(m2l, tlv1.Pt(), event_weight * l2tight_weight);
 	  }
 	}
 	else if (fabs(Zdecayflavour) == 13) {
 	  
 	  h_Muon_loose_m2l   [FR_01_Zpeak][i][0]->Fill(m2l, event_weight);
+    h_Muon_loose_lept1[FR_01_Zpeak][i][0]->Fill(tlv1.Pt(), event_weight);
+	  h_Muon_loose_lepeta1[FR_01_Zpeak][i][0]->Fill(tlv1.Eta(), event_weight);
+	  h_Muon_loose_lept2[FR_01_Zpeak][i][0]->Fill(tlv2.Pt(), event_weight);
+	  h_Muon_loose_lepeta2[FR_01_Zpeak][i][0]->Fill(tlv2.Eta(), event_weight);
 	  h_Muon_loose_pt_m2l[FR_01_Zpeak][i][0]->Fill(m2l, tlv1.Pt(), event_weight);
 	  
 	  if (Zlepton1type == Tight && Zlepton2type == Tight) {
 	    
-	    h_Muon_tight_m2l   [FR_01_Zpeak][i][0]->Fill(m2l, event_weight * l2tight_weight);
+	    h_Muon_tight_m2l[FR_01_Zpeak][i][0]->Fill(m2l, event_weight * l2tight_weight);
+      h_Muon_tight_lept1[FR_01_Zpeak][i][0]->Fill(tlv1.Pt(), event_weight * l2tight_weight);
+	    h_Muon_tight_lepeta1[FR_01_Zpeak][i][0]->Fill(tlv1.Eta(), event_weight * l2tight_weight);
+	    h_Muon_tight_lept2[FR_01_Zpeak][i][0]->Fill(tlv2.Pt(), event_weight * l2tight_weight);
+	    h_Muon_tight_lepeta2[FR_01_Zpeak][i][0]->Fill(tlv2.Eta(), event_weight * l2tight_weight);
 	    h_Muon_tight_pt_m2l[FR_01_Zpeak][i][0]->Fill(m2l, tlv1.Pt(), event_weight * l2tight_weight);
 	  }
 	}
@@ -477,7 +512,8 @@ Bool_t nanoFakes::Process(Long64_t entry)
   if ((76. < m2l && 106. > m2l) && filename.Contains("DY") && Zlepton1type == Tight) {
 
     float Zlep2pt  = Lepton_pt[leptonIndex];
-    float Zlep2eta = fabs(Lepton_eta[leptonIndex]);
+    // float Zlep2eta = fabs(Lepton_eta[leptonIndex]);
+    float Zlep2eta = Lepton_eta[leptonIndex];
     
     if (fabs(Zdecayflavour) == 11) {
     
@@ -557,7 +593,8 @@ void nanoFakes::FillAnalysisHistograms(int icut, int i)
   float btagDown = 0.0;
   float btagUp   = 1.0;
 
-  float lep1eta = fabs(Lepton_eta[0]);
+  // float lep1eta = fabs(Lepton_eta[0]);
+  float lep1eta = Lepton_eta[0];
 
   for (int btag=0; btag<nbtag; btag++) {
 
@@ -596,6 +633,9 @@ void nanoFakes::FillAnalysisHistograms(int icut, int i)
       h_Muon_loose_pt_bin_raw[icut][i][btag]->Fill(Lepton_pt[0]);
       h_Muon_loose_eta_bin   [icut][i][btag]->Fill(lep1eta, event_weight);
 
+      h_Muon_loose_lept1[FR_00_QCD][i][btag]->Fill(Lepton_pt[0], event_weight);
+      h_Muon_loose_lepeta1[FR_00_QCD][i][btag]->Fill(Lepton_eta[0], event_weight);
+
 
       // Tight muons
       //------------------------------------------------------------------------
@@ -605,6 +645,9 @@ void nanoFakes::FillAnalysisHistograms(int icut, int i)
 	h_Muon_tight_pt_bin    [icut][i][btag]->Fill(Lepton_pt[0], event_weight);
 	h_Muon_tight_pt_bin_raw[icut][i][btag]->Fill(Lepton_pt[0]);
 	h_Muon_tight_eta_bin   [icut][i][btag]->Fill(lep1eta, event_weight);
+
+  h_Muon_tight_lept1[FR_00_QCD][i][btag]->Fill(Lepton_pt[0], event_weight);
+  h_Muon_tight_lepeta1[FR_00_QCD][i][btag]->Fill(Lepton_eta[0], event_weight);
       }
 
     } else if (channel == e &&
@@ -619,6 +662,10 @@ void nanoFakes::FillAnalysisHistograms(int icut, int i)
       h_Ele_loose_pt_bin_raw[icut][i][btag]->Fill(Lepton_pt[0]);
       h_Ele_loose_eta_bin   [icut][i][btag]->Fill(lep1eta, event_weight);
 
+      h_Ele_loose_lept1[FR_00_QCD][i][btag]->Fill(Lepton_pt[0], event_weight);
+      h_Ele_loose_lepeta1[FR_00_QCD][i][btag]->Fill(Lepton_eta[0], event_weight);
+      
+
 
       // Tight electrons
       //------------------------------------------------------------------------
@@ -628,6 +675,9 @@ void nanoFakes::FillAnalysisHistograms(int icut, int i)
 	h_Ele_tight_pt_bin    [icut][i][btag]->Fill(Lepton_pt[0], event_weight);
 	h_Ele_tight_pt_bin_raw[icut][i][btag]->Fill(Lepton_pt[0]);
 	h_Ele_tight_eta_bin   [icut][i][btag]->Fill(lep1eta, event_weight);
+
+  h_Ele_tight_lept1[FR_00_QCD][i][btag]->Fill(Lepton_pt[0], event_weight);
+  h_Ele_tight_lepeta1[FR_00_QCD][i][btag]->Fill(Lepton_eta[0], event_weight);
       }
     }
   }
