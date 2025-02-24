@@ -42,11 +42,11 @@ const int      njetet = 1;
 const Double_t muonjetet[njetet] = {30}; 
 const Double_t elejetet [njetet] = {30}; 
 
-const int      nptbin = 6;
-const Double_t ptbins[nptbin+1] = {25, 28, 31, 35, 40, 55, 75};
+const int      nptbin = 8;
+const Double_t ptbins[nptbin+1] = {25.0, 30.0, 35.0, 40.0, 45.0, 60.0, 75.0, 120.0, 200.0};
 
-const int      netabin = 8;
-const Double_t etabins[netabin+1] = {-2.0, -1.5, -1.0, -0.5, 0., 0.5, 1.0, 1.5, 2.0};
+const int      netabin = 10;
+const Double_t etabins[netabin+1] = {-2.5, -2.0, -1.5, -1.0, -0.5, 0., 0.5, 1.0, 1.5, 2.0, 2.5};
 // const int      netabin = 4;
 // const Double_t etabins[netabin+1] = {-2.0, -1.0, 0., 1.0, 2.0};
 
@@ -249,8 +249,8 @@ class nanoFakes : public TSelector
   //  TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90_SS_tthmva_70"};
 
   // 2017 and 2018 (my)
-   TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight_HWWW"};
-   TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90"};
+   TTreeReaderArray<Int_t> muonTightWP = {fReader, "Lepton_isTightMuon_cut_Tight_HWWW_tthmva_80"};
+   TTreeReaderArray<Int_t> eleTightWP  = {fReader, "Lepton_isTightElectron_mvaFall17V2Iso_WP90_tthmva_70"};
 
 
   nanoFakes(TTree * /*tree*/ =0) { }

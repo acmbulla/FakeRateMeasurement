@@ -90,10 +90,10 @@ def submit():
                 if resubmit is False or not os.path.exists('results/'+sample):
                     jobs.append(sample)
         elif year == "2018":
-            # if ("DYJetsToLL_M-10to50-LO__" in sample) or ("DYJetsToLL_M-50-LO__" in sample) or ("WJetsToLNu-LO__" in sample) or ("SingleMuon" in sample) or ("EGamma" in sample):
-            # # if ("DoubleMuon" in sample):
-            #     if resubmit is False or not os.path.exists('results/'+sample):
-            #         jobs.append(sample)
+            if ("DYJetsToLL_M-10to50-LO__" in sample) or ("DYJetsToLL_M-50-LO__" in sample) or ("WJetsToLNu-LO__" in sample) or ("SingleMuon" in sample) or ("EGamma" in sample):
+            # if ("DoubleMuon" in sample):
+                if resubmit is False or not os.path.exists('results/'+sample):
+                    jobs.append(sample)
             if ("TTTo" in sample) or ("ST_" in sample):
             # if ("DoubleMuon" in sample):
                 if resubmit is False or not os.path.exists('results/'+sample):
@@ -143,6 +143,7 @@ def submit():
         subFile.write('error = '+ errFileName +'\n')
         subFile.write('log = '+ logFileName +'\n')
         subFile.write('+JobFlavour  = '+ queue +'\n')
+        subFile.write('MY.WantOS = "el7"\n')
         subFile.write('queue \n')
         subFile.close()
         
@@ -156,6 +157,7 @@ def submit():
     completeJobFile.write('error = '+outputDir+'$(job).err \n')
     completeJobFile.write('log = '+outputDir+'$(job).log \n')
     completeJobFile.write('+JobFlavour  = '+ queue +'\n')
+    completeJobFile.write('MY.WantOS = "el7"\n')
     completeJobFile.write('queue job in (\n')
     for job in jobsList:
         if job != "" and job != "\n":
